@@ -1,25 +1,46 @@
 "use client";
 import React, { useState } from "react";
 import NavigationLink from "../NavigationLink/NavigationLink";
+import Logo from "../Logo/Logo";
+import Button from "../Button/Button";
+import Image from "next/image";
+import ExitIcon from "../../../public/assets/svg/exit.svg";
 
 type NavigationStatus = "business" | "driver";
 
 const Navigation = () => {
     const [status, setStatus] = useState<NavigationStatus>("business");
 
+    const setContent = (status: NavigationStatus) => {
+        switch (status) {
+            case "business":
+                return "for business";
+            case "driver":
+                return "for drivers";
+        }
+    }
+
     return (
         <nav className="fixed top-0 left-0 w-full flex flex-col justify-center  bg-primary-orange rounded-b-2xl">
-            <div className="flex justify-between w-full h-11  px-6 bg-primary-black rounded-b-2xl ">
+            <div className="flex justify-between w-full h-11  px-6 lg:px-20 bg-primary-black rounded-b-2xl border-b border-primary-orange border-solid">
                 <div className="flex justify-center items-end">
                     <NavigationLink to="/business" label="For business" active={status === "business"} onClick={() => setStatus("business")} />
                     <span className="bg-primary-gray mx-4 w-0.5 min-h-full"></span>
                     <NavigationLink to="/driver" label="For drivers" active={status === "driver"} onClick={() => setStatus("driver")} />
                 </div>
-                <div>
-                    {/*  todo partner login btn add */}
+                <div className="hidden lg:flex items-center justify-center">
+                    <Button label="Partner Login" type="dark-base" icon={<Image src={ExitIcon} width={14} height={14} alt="exit" />} />
                 </div>
             </div>
-            <div className="flex justify-between items-center w-full h-13"></div>
+            <div className="flex justify-between items-center w-full h-13 px-6 lg:px-20">
+                <div className="flex items-center">
+                    <Logo size="medium" />
+                    <span className="ml-1 text-sm leading-5 font-extrabold">{setContent(status)}</span>
+                </div>
+                <div>
+                    <Button label="Register" type="green-base" />
+                </div>
+            </div>
         </nav>
     )
 }
