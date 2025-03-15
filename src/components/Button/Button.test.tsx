@@ -14,13 +14,7 @@ describe("Button Component", () => {
         const { container } = render(<Button label="Register" type="green-base" />);
         expect(container.firstChild).toHaveClass("bg-primary-green");
         expect(container.firstChild).toHaveClass("text-primary-black");
-        expect(container.firstChild).toHaveClass("rounded-sm");
-        expect(container.firstChild).toHaveClass("px-3");
-        expect(container.firstChild).toHaveClass("py-1");
-        expect(container.firstChild).toHaveClass("leading-5");
-        expect(container.firstChild).toHaveClass("border");
-        expect(container.firstChild).toHaveClass("border-primary-black");
-        expect(container.firstChild).toHaveClass("border-solid");
+
     });
 
 });

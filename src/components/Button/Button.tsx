@@ -12,7 +12,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ label, onClick, type, disabled }) => {
     const typeClass: { [key in ButtonType]: string } = {
-        "green-base": "bg-primary-green text-primary-black rounded-sm px-3 py-1 leading-5 border border-primary-black border-solid",
+        "green-base": "bg-primary-green text-primary-black text-sm lg:text-lg lg:leading-6 leading-5 rounded-sm px-3 py-1 leading-5 border border-primary-black border-solid cursor-pointer hover:text-white hover:shadow-md hover:scale-105 ",
         "green-long-rounded": "bg-primary-green text-white rounded-full"
     }
 
