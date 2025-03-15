@@ -2,7 +2,14 @@
 import Button from "./Button";
 import { render, screen } from "@testing-library/react";
 
+//mock next/image
+jest.mock("next/image", () => ({
+    __esModule: true,
+    default: (props: any) => <img {...props} />,
+}));
 
+// mock icon image
+jest.mock("../../../public/assets/svg/exit.svg", () => "exit-icon");
 
 describe("Button Component", () => {
     it("renders without crashing", () => {
@@ -17,6 +24,10 @@ describe("Button Component", () => {
 
     });
 
+    it("render icon when passed", () => {
+        render(<Button label="Register" type="green-base" icon={<img src="exit-icon" alt="exit" />} />);
+        expect(screen.getByAltText("exit")).toBeInTheDocument();
+    });
 });
 
 
