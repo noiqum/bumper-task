@@ -18,8 +18,8 @@ const Hero = () => {
                     <div>
                         <h1 className="font-bold font-oswald text-white uppercase">
                             <p className="lg:hidden text-[38px] leading-[38px]">BECOME A BUMPER APPROVED DEPENDABLE DEALERSHIP</p>
-                            <p className="hidden lg:block text-[77px] leading-[80px]">BECOME A BUMPER APPROVED</p>
-                            <p className="hidden lg:block text-[77px] leading-[80px]">DEPENDABLE DEALERSHIP</p>
+                            <p className="hidden lg:block lg:text-6xl lg:leading-16 xl:text-[77px] xl:leading-[80px]">BECOME A BUMPER APPROVED</p>
+                            <p className="hidden lg:block lg:text-6xl lg:leading-16 xl:text-[77px] xl:leading-[80px]">DEPENDABLE DEALERSHIP</p>
                         </h1>
                         <h2 className="text-base leading-6 lg:text-[21px] lg:leading-8 text-white font-open-sans mt-1 lg:mt-4 lg:max-w-2xl">
                             Join our network of 3,000+ garages and dealerships who already offer Bumper to their customers.
