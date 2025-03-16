@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import LogoMark from "../../../public/assets/png/Logomark.png"
 type LogoSize = "small" | "medium" | "large";
 
 interface LogoProps {
@@ -22,7 +22,7 @@ const Logo = ({ size }: LogoProps) => {
 
     return (
         <div className={setClass(size)}>
-            <Image className="w-full  inline-block" src={require("../../../public/assets/png/Logomark.png")} alt="logo" width={100} height={100} />
+            <Image className="w-full  inline-block" src={LogoMark} alt="logo" width={100} height={100} />
         </div>
     );
 }
