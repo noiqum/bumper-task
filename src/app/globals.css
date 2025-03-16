@@ -8,7 +8,10 @@
   --color-primary-gray-blue: #5A698C;
   --color-primary-green: #32BE50;
   --color-primary-gray: #545454;
+  --font-oswald: "Oswald", "sans-serif";
+  --font-open-sans: "Open Sans", "sans-serif";
 }
+
 
 
 body {
