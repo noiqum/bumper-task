@@ -12,7 +12,7 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ label, onClick, type, disabled, icon }) => {
-    const baseClass = "flex text-sm lg:text-lg lg:leading-6 leading-5 border border-solid cursor-pointer hover:shadow-md hover:scale-105 ";
+    const baseClass = "flex items-center text-sm lg:text-lg lg:leading-6 leading-5 border border-solid cursor-pointer hover:shadow-md hover:scale-105 ";
     const sharedGreenClass = "bg-primary-green text-primary-black border-primary-black hover:text-white";
 
     const typeClass: { [key in ButtonType]: string } = {
