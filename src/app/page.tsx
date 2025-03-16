@@ -9,9 +9,6 @@ export default function Home() {
         <Hero />
         <ValueSection />
       </main>
-      <footer >
-
-      </footer>
     </div>
   );
 }
