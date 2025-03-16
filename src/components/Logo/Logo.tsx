@@ -1,12 +1,15 @@
+"use client";
 import Image from "next/image";
 import LogoMark from "../../../public/assets/png/Logomark.png"
+import { redirect } from "next/navigation";
 type LogoSize = "small" | "medium" | "large";
 
 interface LogoProps {
     size: LogoSize;
+    path?: string
 }
 
-const Logo = ({ size }: LogoProps) => {
+const Logo = ({ size, path }: LogoProps) => {
     const setClass = (size: LogoSize) => {
         switch (size) {
             case "small":
@@ -21,7 +24,7 @@ const Logo = ({ size }: LogoProps) => {
     }
 
     return (
-        <div className={setClass(size)}>
+        <div onClick={() => path && redirect(path)} className={setClass(size) + `${path ? " cursor-pointer" : ""}`}>
             <Image className="w-full  inline-block" src={LogoMark} alt="logo" width={100} height={100} />
         </div>
     );

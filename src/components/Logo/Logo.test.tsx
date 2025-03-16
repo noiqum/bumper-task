@@ -1,6 +1,8 @@
 "use client";
-import { render, screen } from '@testing-library/react';
-import Logo from './Logo';
+// Mock the next/navigation module with redirect function
+jest.mock('next/navigation', () => ({
+    redirect: jest.fn()
+}));
 
 // Mock the next/image component
 jest.mock('next/image', () => ({
@@ -11,7 +13,16 @@ jest.mock('next/image', () => ({
 // Mock the require for the image
 jest.mock('../../../public/assets/png/Logomark.png', () => 'logo-path');
 
+import { fireEvent, render, screen } from '@testing-library/react';
+import Logo from './Logo';
+import { redirect } from 'next/navigation';
+
 describe('Logo Component', () => {
+    beforeEach(() => {
+        // Clear all mocks before each test
+        jest.clearAllMocks();
+    });
+
     it('renders without crashing', () => {
         render(<Logo size="medium" />);
         expect(screen.getByAltText('logo')).toBeInTheDocument();
@@ -34,5 +45,10 @@ describe('Logo Component', () => {
         expect(container.firstChild).toHaveClass('h-32');
     });
 
+    it('navigates to the correct path when clicked', () => {
+        render(<Logo size="medium" path='/logo-path' />);
+        fireEvent.click(screen.getByAltText('logo'));
 
+        expect(redirect).toHaveBeenCalledWith('/logo-path');
+    });
 });
