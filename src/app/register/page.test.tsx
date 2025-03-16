@@ -1,0 +1,14 @@
+"use client";
+
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import Register from "./page";
+
+
+describe("Register Page", () => {
+    it("renders without crashing", () => {
+        render(<Register />);
+        expect(screen.getByTestId("register-page")).toBeInTheDocument();
+    });
+
+});
