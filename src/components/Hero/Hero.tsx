@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import Rating from "../Rating/Rating";
 import ArrowRightIcon from "../../../public/assets/svg/arrow_right.svg"
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 
 const Hero = () => {
@@ -26,7 +27,7 @@ const Hero = () => {
                         </h2>
                     </div>
                     <div className="flex flex-col gap-3 items-start">
-                        <Button label="Register Your Interest" type="green-long-rounded" icon={
+                        <Button onClick={() => redirect("/register")} label="Register Your Interest" type="green-long-rounded" icon={
                             <Image src={ArrowRightIcon} alt="arrow-left" width={16} height={16} />
                         } />
                         <p className="font-open-sans">Already registered? <span className="text-[#289B50]  cursor-pointer">Login</span></p>

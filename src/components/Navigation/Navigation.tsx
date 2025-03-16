@@ -5,11 +5,13 @@ import Logo from "../Logo/Logo";
 import Button from "../Button/Button";
 import Image from "next/image";
 import ExitIcon from "../../../public/assets/svg/exit.svg";
+import { useRouter } from "next/navigation";
 
 type NavigationStatus = "business" | "driver";
 
 const Navigation = () => {
     const [status, setStatus] = useState<NavigationStatus>("business");
+    const router = useRouter()
 
     const setContent = (status: NavigationStatus) => {
         switch (status) {
@@ -34,11 +36,11 @@ const Navigation = () => {
             </div>
             <div className="flex justify-between items-center w-full h-13 px-6 lg:px-20">
                 <div className="flex items-center">
-                    <Logo size="medium" />
+                    <Logo size="medium" path="/" />
                     <span className="ml-1 text-sm leading-5 font-extrabold">{setContent(status)}</span>
                 </div>
                 <div>
-                    <Button label="Register" type="green-base" />
+                    <Button onClick={() => router.push("/register")} label="Register" type="green-base" />
                 </div>
             </div>
         </nav>

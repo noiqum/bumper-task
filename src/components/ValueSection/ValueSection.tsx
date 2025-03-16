@@ -4,6 +4,7 @@ import PhoneMockup from "../../../public/assets/webp/phone_mockup.webp";
 import Step from "../Step/Step";
 import Button from "../Button/Button";
 import ArrowRight from "../../../public/assets/svg/arrow_right.svg";
+import Link from "next/link";
 
 
 
@@ -54,7 +55,9 @@ const ValueSection = () => {
             </div>
             {/*  cta button */}
             <div className="lg:col-start-1">
-                <Button label="Register your interest" type="green-long-rounded" icon={<Image src={ArrowRight} width={19} height={16} alt="arrow-right" />} />
+                <Link href="/register" >
+                    <Button label="Register your interest" type="green-long-rounded" icon={<Image src={ArrowRight} width={19} height={16} alt="arrow-right" />} />
+                </Link>
             </div>
         </section>
     );
