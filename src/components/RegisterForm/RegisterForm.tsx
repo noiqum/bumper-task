@@ -1,11 +1,11 @@
 "use client";
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Button from '../Button/Button';
-import ArrowRight from '../../../public/assets/svg/arrow_right.svg'
+/* import ArrowRight from '../../../public/assets/svg/arrow_right.svg' */
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FormField from '../FormField/FormField';
 import Persona from "../../../public/assets/svg/persona.svg";
 import Building from "../../../public/assets/svg/building.svg";
@@ -15,6 +15,8 @@ import Tool from "../../../public/assets/svg/tool.svg";
 import Home from "../../../public/assets/svg/home.svg";
 import Warning from "../../../public/assets/svg/warning.svg";
 import Check from "../../../public/assets/svg/check.svg";
+
+import { ArrowRight } from "lucide-react"
 
 import { CheckBox } from '../CheckBox/CheckBox';
 import { registerCompany } from '@/app/actions/register_actions';
@@ -270,7 +272,7 @@ const RegisterForm = () => {
                     className='w-full justify-center'
                     type="green-long-rounded"
                     label='Register'
-                    icon={<Image src={ArrowRight} alt='arrow-right' width={20} height={20} />}
+                    icon={<ArrowRight size={20} />}
                 />
 
                 <p className='text-center'>Already registered? <span className="text-[#289B50] cursor-pointer">Login</span></p>
