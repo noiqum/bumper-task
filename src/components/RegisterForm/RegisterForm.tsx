@@ -90,7 +90,7 @@ const RegisterForm = () => {
         payment_options: false
     });
 
-    const { register, handleSubmit, formState: { errors }, trigger, setValue, getValues } = useForm<RegisterFormData>({
+    const { register, handleSubmit, formState: { errors, isSubmitting }, trigger, setValue, getValues } = useForm<RegisterFormData>({
         resolver: yupResolver(validationSchema),
         mode: 'onBlur', // Validate on blur
         defaultValues: {
@@ -102,6 +102,7 @@ const RegisterForm = () => {
             pay_later: false,
             pay_now: false,
         }
+
     });
 
     const handleBlur = (fieldName: keyof typeof touchedFields) => {
@@ -273,6 +274,7 @@ const RegisterForm = () => {
                     type="green-long-rounded"
                     label='Register'
                     icon={<ArrowRight size={20} />}
+                    loading={isSubmitting}
                 />
 
                 <p className='text-center'>Already registered? <span className="text-[#289B50] cursor-pointer">Login</span></p>

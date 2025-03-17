@@ -33,6 +33,11 @@ describe("Button Component", () => {
         render(<Button label="Register" type="green-base" className="custom-class" />);
         expect(screen.getByText("Register")).toHaveClass("custom-class");
     });
+
+    it("applies loading class when loading prop is true", () => {
+        render(<Button label="Register" type="green-base" loading />);
+        expect(screen.getByText("Register")).toHaveClass("animate-pulse cursor-wait pointer-events-none");
+    })
 });
 
 
