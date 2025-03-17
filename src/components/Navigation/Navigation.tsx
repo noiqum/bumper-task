@@ -26,7 +26,7 @@ const Navigation = () => {
         <nav className="fixed z-50 top-0 left-0 w-full flex flex-col justify-center  bg-primary-orange rounded-b-2xl">
             <div className="flex justify-between w-full h-11  px-6 lg:px-20 bg-primary-black rounded-b-2xl border-b border-primary-orange border-solid">
                 <div className="flex justify-center items-end">
-                    <NavigationLink to="/business" label="For business" active={status === "business"} onClick={() => setStatus("business")} />
+                    <NavigationLink to="/register" label="For business" active={status === "business"} onClick={() => setStatus("business")} />
                     <span className="bg-primary-gray mx-4 w-0.5 min-h-full"></span>
                     <NavigationLink to="/driver" label="For drivers" active={status === "driver"} onClick={() => setStatus("driver")} />
                 </div>
