@@ -28,6 +28,11 @@ describe("Button Component", () => {
         render(<Button label="Register" type="green-base" icon={<img src="exit-icon" alt="exit" />} />);
         expect(screen.getByAltText("exit")).toBeInTheDocument();
     });
+
+    it("applies className prop if provided", () => {
+        render(<Button label="Register" type="green-base" className="custom-class" />);
+        expect(screen.getByText("Register")).toHaveClass("custom-class");
+    });
 });
 
 
