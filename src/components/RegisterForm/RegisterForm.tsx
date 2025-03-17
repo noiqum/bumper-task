@@ -19,7 +19,7 @@ import Check from "../../../public/assets/svg/check.svg";
 import { ArrowRight } from "lucide-react"
 
 import { CheckBox } from '../CheckBox/CheckBox';
-import { registerCompany } from '@/app/actions/register_actions';
+
 
 
 interface RegisterFormData {
@@ -117,15 +117,22 @@ const RegisterForm = () => {
     const onSubmit = async (formData: RegisterFormData) => {
 
         try {
-            const data = new FormData();
-            data.append('name', formData.name);
-            data.append('company', formData.company);
-            data.append('mobile_phone', formData.mobile_phone);
-            data.append('email_address', formData.email_address);
-            data.append('postcode', formData.postcode);
-            data.append('pay_later', formData.pay_later ? '1' : '0');
-            data.append('pay_now', formData.pay_now ? '1' : '0');
-            const response = await registerCompany(data);
+            const data = JSON.stringify({
+                name: formData.name,
+                company: formData.company,
+                mobile_phone: formData.mobile_phone,
+                email_address: formData.email_address,
+                postcode: formData.postcode,
+                pay_later: formData.pay_later,
+                pay_now: formData.pay_now
+            })
+            const response = await fetch(
+                '/api/register',
+                {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: data
+                }
+            );
             console.log(response);
         } catch (error) {
             console.log(error);
