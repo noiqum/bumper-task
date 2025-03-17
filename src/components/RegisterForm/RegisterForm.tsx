@@ -17,6 +17,7 @@ import Warning from "../../../public/assets/svg/warning.svg";
 import Check from "../../../public/assets/svg/check.svg";
 
 import { CheckBox } from '../CheckBox/CheckBox';
+import { registerCompany } from '@/app/actions/register_actions';
 
 
 interface RegisterFormData {
@@ -65,7 +66,6 @@ const validationSchema = yup.object().shape({
     'at-least-one-payment-option',
     'At least one payment option must be selected',
     function (values) {
-        console.log(values);
         if ((!values.pay_later && !values.pay_now)) {
             return this.createError({
                 path: 'pay_later',
@@ -111,9 +111,23 @@ const RegisterForm = () => {
         trigger(fieldName as any);
     };
 
-    const onSubmit = (data: RegisterFormData) => {
-        console.log("erros", errors);
-        console.log('Form submitted with data:', data);
+    const onSubmit = async (formData: RegisterFormData) => {
+
+        try {
+            const data = new FormData();
+            data.append('name', formData.name);
+            data.append('company', formData.company);
+            data.append('mobile_phone', formData.mobile_phone);
+            data.append('email_address', formData.email_address);
+            data.append('postcode', formData.postcode);
+            data.append('pay_later', formData.pay_later ? '1' : '0');
+            data.append('pay_now', formData.pay_now ? '1' : '0');
+            const response = await registerCompany(data);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+
     };
 
     const baseClass = "p-4 border border-solid rounded-full w-full outline-none focus:outline-none";
@@ -139,9 +153,7 @@ const RegisterForm = () => {
         }
         return;
     };
-    useEffect(() => {
-        console.log(errors);
-    }, [errors]);
+
 
     return (
         <div data-testid="register-form" className="w-full px-4 py-6 bg-white rounded-[30px] border border-solid border-primary-black *:mb-5">
