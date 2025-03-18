@@ -7,6 +7,8 @@ import Company from "../../../public/assets/svg/building.svg"
 import FormField from "../FormField/FormField";
 import Image from "next/image";
 import DealerCard from "../DealerCard/DealerCard";
+import Button from "../Button/Button";
+
 
 interface SearchDealershipsProps {
     initialDealerships: Dealership[];
@@ -80,22 +82,18 @@ export default function SearchDealerships({ initialDealerships, totalRecords, pa
             )}
 
             {/* Pagination Controls */}
-            <div className="flex justify-center space-x-4 mt-4">
-                <button
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-                >
-                    Previous
-                </button>
+            <div className="flex justify-center items-center space-x-4 mt-4">
+                <Button
+                    type="dark-base"
+                    label="Previous"
+                    onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))} />
+
                 <span className="text-white">Page {currentPage} of {totalPages}</span>
-                <button
-                    disabled={currentPage >= totalPages}
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
-                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-                >
-                    Next
-                </button>
+
+                <Button
+                    type="dark-base"
+                    label="Next"
+                    onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))} />
             </div>
         </>
     );
