@@ -6,7 +6,9 @@ import React from 'react';
 interface FormFieldProps {
     id: string;
     label: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     register: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     errors: any;
     baseClass: string;
     placeholder?: string;

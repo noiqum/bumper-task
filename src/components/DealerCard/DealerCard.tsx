@@ -3,12 +3,12 @@ import { Dealership } from '../../app/actions/dealerShip';
 
 interface DealerCardProps {
     dealer: Dealership;
-    onSelect?: (dealer: Dealership) => void;
+
 }
 
 
 
-const DealerCard: React.FC<DealerCardProps> = ({ dealer, onSelect }) => {
+const DealerCard: React.FC<DealerCardProps> = ({ dealer }) => {
 
     const baseRowClass = "flex justify-between border-b border-solid border-[#CDD2DC] py-1.5 md:py-2"
 

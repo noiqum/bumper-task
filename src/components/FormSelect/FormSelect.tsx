@@ -3,7 +3,9 @@ import React, { useState, useRef, useEffect } from 'react';
 interface FormSelectProps {
     id: string;
     label: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     register: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     errors: any;
     baseClass: string;
     options: { value: string; label: string }[];

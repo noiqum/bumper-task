@@ -7,6 +7,7 @@ jest.mock('next/navigation', () => ({
 // Mock the next/image component
 jest.mock('next/image', () => ({
     __esModule: true,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     default: (props: any) => <img {...props} />
 }));
 

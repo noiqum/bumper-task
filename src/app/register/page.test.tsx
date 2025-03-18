@@ -3,7 +3,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Register from "./page";
-import { useRouter } from "next/navigation";
 import { ModalProvider } from "@/contexts/ModalContext";
 
 // Mock useRouter

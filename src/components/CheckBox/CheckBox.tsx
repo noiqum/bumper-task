@@ -2,14 +2,15 @@
 import { useCallback, useRef } from "react";
 import { Check, Plus } from "lucide-react"
 import Warning from "../../../public/assets/svg/warning.svg";
-import { FieldError } from "react-hook-form";
 import Image from "next/image";
 export interface CheckBoxProps {
     id: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     register: any;
     customClass?: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     label: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     errors?: any;
     errorID: string
 }

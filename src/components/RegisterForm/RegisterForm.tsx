@@ -117,6 +117,7 @@ const RegisterForm = () => {
             ...prev,
             [fieldName]: true
         }));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         trigger(fieldName as any);
     };
 
@@ -153,6 +154,7 @@ const RegisterForm = () => {
             showModal('success', 'Registration successful!');
 
         } catch (error) {
+            console.error('Registration error:', error);
             showModal('error', 'An unexpected error occurred');
         }
 

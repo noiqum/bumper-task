@@ -5,6 +5,7 @@ import { render, screen } from "@testing-library/react";
 //mock next/image
 jest.mock("next/image", () => ({
     __esModule: true,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     default: (props: any) => <img {...props} />,
 }));
 

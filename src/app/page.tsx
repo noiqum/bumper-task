@@ -1,4 +1,4 @@
-import NavigationLink from "@/components/NavigationLink/NavigationLink";
+
 import Hero from "@/components/Hero/Hero";
 import ValueSection from "@/components/ValueSection/ValueSection";
 
