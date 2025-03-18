@@ -1,24 +1,5 @@
 /// <reference types="cypress" />
 
-Cypress.Commands.add('triggerValidation', (formSelector) => {
-    cy.get(formSelector).then(($form) => {
-        cy.window().then((win) => {
-            const formElement = win.document.querySelector(formSelector);
-            if (formElement) {
-                formElement.dispatchEvent(new Event('submit', { bubbles: true }));
-            }
-        });
-    });
-});
-export { };
-
-declare global {
-    namespace Cypress {
-        interface Chainable {
-            triggerValidation(formSelector: string): unknown;
-        }
-    }
-}
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
