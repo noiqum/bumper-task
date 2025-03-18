@@ -10,9 +10,10 @@ interface ButtonProps {
     loading?: boolean;
     icon?: React.ReactNode;
     className?: string;
+    testId?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, type, disabled, icon, className, loading }) => {
+const Button: React.FC<ButtonProps> = ({ label, onClick, type, disabled, icon, className, loading, testId }) => {
     const baseClass = "flex items-center text-sm lg:text-lg lg:leading-6 leading-5 border border-solid cursor-pointer hover:shadow-md ";
     const sharedGreenClass = "bg-primary-green text-primary-black border-primary-black hover:text-white hover:*:text-white";
     const loadingClass = `${loading ? "animate-pulse cursor-wait pointer-events-none" : ""}`;
@@ -23,7 +24,7 @@ const Button: React.FC<ButtonProps> = ({ label, onClick, type, disabled, icon, c
     };
 
     return (
-        <button onClick={onClick} disabled={disabled} className={typeClass[type]}>
+        <button data-testid={testId} onClick={onClick} disabled={disabled} className={typeClass[type]}>
             {label}
             {icon && <span className="ml-2 ">{icon}</span>}
         </button>

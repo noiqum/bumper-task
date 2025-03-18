@@ -40,7 +40,7 @@ const Navigation = () => {
                     <span className="ml-1 text-sm leading-5 font-extrabold">{setContent(status)}</span>
                 </div>
                 <div>
-                    <Button onClick={() => router.push("/register")} label="Register" type="green-base" />
+                    <Button testId="register-button-nav" onClick={() => router.push("/register")} label="Register" type="green-base" />
                 </div>
             </div>
         </nav>

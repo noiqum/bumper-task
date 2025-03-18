@@ -9,7 +9,7 @@ export function Modal() {
     if (!modalType) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div data-testid="modal" className="fixed inset-0 flex items-center justify-center z-50">
             <div className="fixed inset-0 bg-black opacity-50" onClick={hideModal}></div>
             <div className="bg-white rounded-lg p-6 z-10 max-w-md w-full mx-4">
                 <div className="flex justify-between items-center mb-4">

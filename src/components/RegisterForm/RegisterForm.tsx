@@ -104,6 +104,7 @@ const RegisterForm = () => {
 
     });
 
+
     const handleBlur = (fieldName: keyof typeof touchedFields) => {
 
         setTouchedFields(prev => ({
@@ -293,6 +294,8 @@ const RegisterForm = () => {
                     label='Register'
                     icon={<ArrowRight size={20} />}
                     loading={isSubmitting}
+                    disabled={isSubmitting}
+                    testId="submit-button"
                 />
 
                 <p className='text-center'>Already registered? <span className="text-[#289B50] cursor-pointer">Login</span></p>
