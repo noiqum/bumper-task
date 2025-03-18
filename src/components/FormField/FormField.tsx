@@ -15,12 +15,13 @@ interface FormFieldProps {
     fieldIcon?: React.ReactNode;
     getBorderColorClass: () => string;
     handleBlur: (field: string) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const FormField: React.FC<FormFieldProps> = ({ id, label, register, errors, baseClass, getBorderColorClass, handleBlur, placeholder, icon, fieldIcon }) => {
+const FormField: React.FC<FormFieldProps> = ({ id, label, register, errors, baseClass, getBorderColorClass, handleBlur, placeholder, icon, fieldIcon, onChange }) => {
     return (
         <div className="form-group">
-            <label htmlFor={id} className="flex items-end text-sm font-extrabold text-gray-700 mb-2 gap-1">
+            <label htmlFor={id} className="flex items-end text-base leading-5 font-extrabold text-gray-700 mb-2 gap-1">
                 {icon && <span className="mr-2">{icon}</span>} {label}
             </label>
             <div className='relative'>
@@ -31,6 +32,7 @@ const FormField: React.FC<FormFieldProps> = ({ id, label, register, errors, base
                     {...register(id)}
                     className={`${baseClass} ${getBorderColorClass()}`}
                     onBlur={() => handleBlur(id)}
+                    onChange={onChange}
                 />
                 {fieldIcon && <span className="absolute right-4 top-[calc(1rem+50%)] transform -translate-y-[calc(1rem+50%)]">{fieldIcon}</span>}
             </div>

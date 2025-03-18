@@ -3,6 +3,10 @@
 import { useState, useEffect } from "react";
 import { searchDealerships, Dealership } from "../../app/actions/dealerShip";
 import { useDebounce } from "../../hooks/useDebounce";
+import Company from "../../../public/assets/svg/building.svg"
+import FormField from "../FormField/FormField";
+import Image from "next/image";
+import DealerCard from "../DealerCard/DealerCard";
 
 interface SearchDealershipsProps {
     initialDealerships: Dealership[];
@@ -44,34 +48,33 @@ export default function SearchDealerships({ initialDealerships, totalRecords, pa
     return (
         <>
             {/* Search Input */}
-            <div className="px-4 py-4">
-                <div className="max-w-md mx-auto w-full">
-                    <input
-                        type="text"
-                        placeholder="Search by name, company, email or phone..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                </div>
+            <div className="bg-white rounded-[40px] p-4 lg:p-8 boder border-solid border-primary-black mb-5  ">
+                <FormField
+                    id="search"
+                    label="Search Company"
+                    placeholder="Search by name, company, email or phone..."
+                    register={() => ({})} // Placeholder for register function
+                    errors={{}}
+                    baseClass="p-4 border border-solid rounded-full w-full outline-none focus:outline-none focus:ring-2 focus:ring-primary-orange boder-primary-black"
+                    getBorderColorClass={() => ""}
+                    handleBlur={() => { }}
+                    type="text"
+                    icon={<Image src={Company} alt="company" width={16} height={20} />}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </div>
-
             {/* Dealership List */}
             {loading ? (
                 <div className="text-white text-center py-8">Loading...</div>
             ) : dealerships.length === 0 ? (
                 <div className="text-white text-center py-8">No dealerships found</div>
             ) : (
-                <div>
-                    {dealerships.map((item) => (
-                        <div key={item.id} className="flex flex-col items-start bg-primary-gray-blue pt-6 pb-6 px-4">
-                            <div className="mt-2 mb-2 mx-4 flex flex-col items-start lg:max-w-3xl lg:mx-auto">
-                                <h1 className="text-2xl leading-8 font-bold text-white">{item.name}</h1>
-                                <p className="text-white">Company: {item.company}</p>
-                                <p className="text-white">Email: {item.email_address}</p>
-                                <p className="text-white">Phone: {item.mobile_phone}</p>
-                            </div>
-                        </div>
+                <div className="space-y-4">
+                    {dealerships.map((dealer) => (
+                        <DealerCard
+                            key={dealer.id}
+                            dealer={dealer}
+                        />
                     ))}
                 </div>
             )}

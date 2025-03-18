@@ -8,13 +8,15 @@ export default async function DriverPage() {
     const data = await res.json();
 
     return (
-        <div className="flex flex-col min-h-screen bg-primary-gray-blue">
-            <h1 className="text-3xl leading-10 font-bold text-white mt-4">Interested Dealerships</h1>
-            <SearchDealerships
-                initialDealerships={data.data}
-                totalRecords={data.total}
-                pageSize={limit}
-            />
+        <div className="flex flex-col items-center  min-h-screen bg-primary-gray-blue pt-24 pb-24 px-4 lg:pb-8">
+            <div className="lg:max-w-3xl w-full">
+                <h1 className="text-3xl leading-10 font-bold text-white my-4 lg:my-6">Interested Dealerships</h1>
+                <SearchDealerships
+                    initialDealerships={data.data}
+                    totalRecords={data.total}
+                    pageSize={limit}
+                />
+            </div>
         </div>
     );
 }
