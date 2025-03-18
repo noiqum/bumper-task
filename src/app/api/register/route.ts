@@ -2,15 +2,30 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/utils/supabase';
 
+
+export async function GET(request: Request) {
+
+    const { data: registeredCompanies, error } = await supabase
+        .from('registrations')
+        .select('*');
+
+    if (error) {
+
+        return NextResponse.json({
+            message: 'Failed to fetch registrations'
+        }, { status: 500 });
+    }
+
+    return NextResponse.json({
+        message: 'Successfully retrieved registrations',
+        data: registeredCompanies
+    }, { status: 200 });
+}
+
 export async function POST(request: Request) {
     try {
         // Parse the JSON body
         const formData = await request.json();
-        const { data: users } = await supabase
-            .from('registrations')
-            .select('id')
-            .eq("*", "*")
-        console.log(users)
         // Check if email already exists
         const { data: existingUser, error: searchError } = await supabase
             .from('registrations')
@@ -29,7 +44,7 @@ export async function POST(request: Request) {
         if (existingUser) {
             return NextResponse.json({
                 message: 'Email address already registered'
-            }, { status: 409 }); // 409 Conflict is appropriate for duplicate resources
+            }, { status: 409 });
         }
 
         // If email doesn't exist, proceed with insert
