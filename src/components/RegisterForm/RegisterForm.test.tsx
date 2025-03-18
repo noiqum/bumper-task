@@ -50,13 +50,24 @@ describe("RegisterForm Component", () => {
         expect(emailAddressInput).toHaveAttribute("id", "email_address");
     });
 
-    it("renders the postcode input field", () => {
-        render(<ModalProvider>
-            <RegisterForm />
-        </ModalProvider>);
-        const postcodeInput = screen.getByRole("textbox", { name: /postcode/i });
-        expect(postcodeInput).toBeInTheDocument();
-        expect(postcodeInput).toHaveAttribute("id", "postcode");
+    it("renders the postcode dropdown", () => {
+        render(
+            <ModalProvider>
+                <RegisterForm />
+            </ModalProvider>
+        );
+
+        // Find the label element
+        const postcodeLabel = screen.getByText(/Select your postcode/i);
+        expect(postcodeLabel).toBeInTheDocument();
+
+        // Find the custom dropdown by its accessible role
+        const dropdownTrigger = screen.getByRole('combobox', { name: /postcode/i });
+        expect(dropdownTrigger).toBeInTheDocument();
+
+        // Verify the hidden input exists (connected to form handling)
+        const hiddenInput = document.getElementById('postcode');
+        expect(hiddenInput).toBeInTheDocument();
     });
 
     it("renders the pay later checkbox", () => {
@@ -165,18 +176,25 @@ describe('RegisterForm validation tests', () => {
             </ModalProvider>
         );
 
-        // Fill in all required fields except payment options
+        // Fill in standard input fields
         const nameInput = screen.getByLabelText(/name/i);
         const companyInput = screen.getByLabelText(/company/i);
         const phoneInput = screen.getByLabelText(/mobile phone/i);
         const emailInput = screen.getByLabelText(/email address/i);
-        const postcodeInput = screen.getByLabelText(/postcode/i);
 
         fireEvent.change(nameInput, { target: { value: 'John Doe' } });
         fireEvent.change(companyInput, { target: { value: 'ABC Company' } });
         fireEvent.change(phoneInput, { target: { value: '0712345678' } });
         fireEvent.change(emailInput, { target: { value: 'M8tD1@example.com' } });
-        fireEvent.change(postcodeInput, { target: { value: '1234' } });
+
+        // For the postcode select dropdown:
+        // 1. Click to open the dropdown
+        const postcodeTrigger = screen.getByLabelText(/postcode/i);
+        fireEvent.click(postcodeTrigger);
+
+        // 2. Select an option from the dropdown
+        const postcodeOption = screen.getByText('E1 - East London'); // Adjust this to match an actual option
+        fireEvent.click(postcodeOption);
 
         // Submit without selecting either payment option
         const submitButton = screen.getByRole("button", { name: /register/i });

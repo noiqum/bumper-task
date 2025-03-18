@@ -6,6 +6,7 @@ import Button from '../Button/Button';
 import Image from 'next/image';
 import { useState } from 'react';
 import FormField from '../FormField/FormField';
+import FormSelect from '../FormSelect/FormSelect';
 import Persona from "../../../public/assets/svg/persona.svg";
 import Building from "../../../public/assets/svg/building.svg";
 import Phone from "../../../public/assets/svg/phone.svg";
@@ -18,7 +19,12 @@ import { ArrowRight } from "lucide-react"
 import { CheckBox } from '../CheckBox/CheckBox';
 import { useModal } from '@/contexts/ModalContext';
 
-
+const postcodeOptions = [
+    { value: 'E1', label: 'E1 - East London' },
+    { value: 'SW1', label: 'SW1 - South West London' },
+    { value: 'NW1', label: 'NW1 - North West London' },
+    // Add more postcode options as needed
+];
 
 interface RegisterFormData {
     name: string;
@@ -239,17 +245,18 @@ const RegisterForm = () => {
                     fieldIcon={getFieldIcon('email_address')}
                 />
 
-                <FormField
-                    type="text"
+                <FormSelect
                     id="postcode"
                     label="Postcode"
                     register={register}
                     errors={errors}
                     baseClass={baseClass}
+                    options={postcodeOptions}
                     getBorderColorClass={() => getBorderColorClass('postcode')}
                     handleBlur={() => handleBlur('postcode')}
                     icon={<Image src={Home} alt="Postcode" width={20} height={20} />}
                     fieldIcon={getFieldIcon('postcode')}
+                    placeholder="Select your postcode"
                 />
 
                 <div className="form-group">
