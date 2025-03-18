@@ -44,15 +44,15 @@ const validationSchema = yup.object().shape({
 
     mobile_phone: yup
         .string()
-        .matches(/^0(\s*)(7)(\s*)(\d(\s*)){9}$/, 'Mobile phone must start with 07 followed by 9 digits')
-        .required('Mobile phone is required'),
+        .required('Mobile phone is required')
+        .matches(/^0(\s*)(7)(\s*)(\d(\s*)){9}$/, 'Mobile phone must start with 07 followed by 9 digits'),
 
     email_address: yup
         .string()
+        .required('Email address is required')
         .email('Must be a valid email')
         .min(5, 'Email should be at least 5 characters')
-        .max(255, 'Email should not exceed 255 characters')
-        .required('Email address is required'),
+        .max(255, 'Email should not exceed 255 characters'),
 
     postcode: yup
         .string()
@@ -89,7 +89,7 @@ const RegisterForm = () => {
         payment_options: false
     });
 
-    const { register, handleSubmit, formState: { errors, isSubmitting }, trigger, setValue, getValues } = useForm<RegisterFormData>({
+    const { register, handleSubmit, formState: { errors, isSubmitting }, trigger, setValue, getValues, } = useForm<RegisterFormData>({
         resolver: yupResolver(validationSchema),
         mode: 'onBlur', // Validate on blur
         defaultValues: {
@@ -184,6 +184,7 @@ const RegisterForm = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
 
+
                 <FormField
                     type="text"
                     id="name"
@@ -196,6 +197,7 @@ const RegisterForm = () => {
                     icon={<Image src={Persona} alt="Persona" width={20} height={20} />}
                     fieldIcon={getFieldIcon('name')}
                 />
+
 
                 <FormField
                     type="text"
