@@ -4,23 +4,29 @@ import { supabase } from '@/utils/supabase';
 
 
 export async function GET(request: Request) {
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get('page') || '1', 10);
+    const limit = parseInt(searchParams.get('limit') || '10', 10);
+    const offset = (page - 1) * limit;
 
-    const { data: registeredCompanies, error } = await supabase
+    const { data: registeredCompanies, error, count } = await supabase
         .from('registrations')
-        .select('*');
+        .select('*', { count: 'exact' }) // Get total count for pagination
+        .range(offset, offset + limit - 1);
 
     if (error) {
-
-        return NextResponse.json({
-            message: 'Failed to fetch registrations'
-        }, { status: 500 });
+        return NextResponse.json({ message: 'Failed to fetch registrations' }, { status: 500 });
     }
 
     return NextResponse.json({
         message: 'Successfully retrieved registrations',
-        data: registeredCompanies
+        data: registeredCompanies,
+        total: count,
+        page,
+        limit
     }, { status: 200 });
 }
+
 
 export async function POST(request: Request) {
     try {

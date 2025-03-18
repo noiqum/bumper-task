@@ -7,21 +7,27 @@ export interface Dealership {
     email_address: string;
     mobile_phone: string;
     postcode: string;
+
 }
 
 export interface ApiResponse {
     success: boolean;
     data?: Dealership[];
     error?: string;
+    total?: number;
 }
 
-export async function searchDealerships(term: string): Promise<Dealership[]> {
+export async function searchDealerships(term: string, page: number = 1, limit: number = 10): Promise<ApiResponse> {
     try {
+        const offset = (page - 1) * limit;
+
         let query = supabase
             .from('registrations')
-            .select('*');
+            .select('*', { count: 'exact' }) // Fetch total count for pagination
+            .order('created_at', { ascending: false })
+            .range(offset, offset + limit - 1); // Paginate results
 
-        // Apply search filter if search term provided
+        // Apply search filter if search term is provided
         if (term && term.trim() !== '') {
             query = query.or(
                 `name.ilike.%${term}%,company.ilike.%${term}%,email_address.ilike.%${term}%,mobile_phone.ilike.%${term}%`
@@ -29,17 +35,19 @@ export async function searchDealerships(term: string): Promise<Dealership[]> {
         }
 
         // Execute the query
-        const { data, error } = await query
-            .order('created_at', { ascending: false })
-            .limit(50);
+        const { data, error, count } = await query;
 
         if (error) {
             throw new Error(`Supabase error: ${error.message}`);
         }
 
-        return data || [];
+        return {
+            success: true,
+            data: data || [],
+            total: count || 0,
+        };
     } catch (error) {
         console.error('Search dealerships error:', error);
-        return []; // Return empty array on error
+        return { success: false, error: 'Failed to fetch dealerships' };
     }
 }
