@@ -3,7 +3,8 @@ import { Oswald, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation/Navigation";
 
-
+import { ModalProvider } from '@/contexts/ModalContext';
+import { Modal } from '../components/Modal/Modal';
 const oswald = Oswald({
   variable: "--font-oswald",
   subsets: ["latin"],
@@ -28,8 +29,11 @@ export default function RootLayout({
       <body
         className={`${oswald.variable} ${openSans.variable} antialiased`}
       >
-        <Navigation />
-        {children}
+        <ModalProvider>
+          <Navigation />
+          {children}
+          <Modal />
+        </ModalProvider>
       </body>
     </html>
   );

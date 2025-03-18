@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Button from '../Button/Button';
-/* import ArrowRight from '../../../public/assets/svg/arrow_right.svg' */
 import Image from 'next/image';
 import { useState } from 'react';
 import FormField from '../FormField/FormField';
@@ -15,10 +14,9 @@ import Tool from "../../../public/assets/svg/tool.svg";
 import Home from "../../../public/assets/svg/home.svg";
 import Warning from "../../../public/assets/svg/warning.svg";
 import Check from "../../../public/assets/svg/check.svg";
-
 import { ArrowRight } from "lucide-react"
-
 import { CheckBox } from '../CheckBox/CheckBox';
+import { useModal } from '@/contexts/ModalContext';
 
 
 
@@ -79,6 +77,7 @@ const validationSchema = yup.object().shape({
 );
 
 const RegisterForm = () => {
+    const { showModal } = useModal();
     const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({
         name: false,
         company: false,
@@ -133,9 +132,21 @@ const RegisterForm = () => {
                     body: data
                 }
             );
-            console.log(response);
+            const result = await response.json();
+
+            if (!response.ok) {
+                if (response.status === 409) {
+                    showModal('error', 'This email address is already registered');
+                } else {
+                    showModal('error', result.message || 'Registration failed');
+                }
+                return;
+            }
+
+            showModal('success', 'Registration successful!');
+
         } catch (error) {
-            console.log(error);
+            showModal('error', 'An unexpected error occurred');
         }
 
     };
