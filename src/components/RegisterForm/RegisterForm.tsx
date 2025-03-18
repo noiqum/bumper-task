@@ -259,6 +259,7 @@ const RegisterForm = () => {
                     icon={<Image src={Home} alt="Postcode" width={20} height={20} />}
                     fieldIcon={getFieldIcon('postcode')}
                     placeholder="Select your postcode"
+                    onChange={(value: string) => setValue('postcode', value)}
                 />
 
                 <div className="form-group">
